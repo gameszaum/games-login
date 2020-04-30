@@ -1,0 +1,36 @@
+# GamesLogin configuration file.
+
+#
+# _____            __  __  ______   _____         _       ____    _____  _____  _   _
+# / ____|    /\    |  \/  ||  ____| / ____|       | |     / __ \  / ____||_   _|| \ | |
+# | |  __    /  \   | \  / || |__   | (___  ______ | |    | |  | || |  __   | |  |  \| |
+# | | |_ |  / /\ \  | |\/| ||  __|   \___ \|______|| |    | |  | || | |_ |  | |  | . ` |
+# | |__| | / ____ \ | |  | || |____  ____) |       | |____| |__| || |__| | _| |_ | |\  |
+# \_____|/_/    \_\|_|  |_||______||_____/        |______|\____/  \_____||_____||_| \_|
+#
+
+
+# Plugin inspired in NetinAuthPrime-Full.
+# NetinAuth repository: https://github.com/netindev/NetinAuth
+
+# Define if the plugin will use MySQL.
+# Defina se o plugin vai usar ou não MySQL.
+
+use-mysql: true
+
+# If the player is cracked, it will be connected to another server to login.
+# Se o player for pirata, vai ser enviado até outro servidor para logar.
+
+login-server: login
+
+# Default server, after login the player will be connected to this server, if you do not want this, just keep empty.
+# Servidor padrão, após o login o jogador será enviado até este servidor, se você não quiser assim, deixe em branco.
+
+default-server:
+
+mysql:
+  host: localhost
+  db: plugins
+  port: 3306
+  user: root
+  pass:

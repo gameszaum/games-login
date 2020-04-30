@@ -1,0 +1,6 @@
+name: GamesLogin
+version: ${project.version}
+main: com.gameszaum.login.spigot.Bukkit
+authors: [gameszaum]
+website: gameszaum.com
+description: A authentication plugin inspired in NetinAuth.

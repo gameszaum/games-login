@@ -1,0 +1,7 @@
+name: GamesLogin
+version: 1.0-SNAPSHOT
+main: com.gameszaum.login.bungee.Bungee
+api-version: 1.8.8
+authors: [gameszaum]
+website: gameszaum.com
+description: A authentication plugin inspired in NetinAuth which cracked players needs registration/login and premium players bypass this.
