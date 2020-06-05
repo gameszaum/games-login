@@ -5,8 +5,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.net.SocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -47,29 +45,6 @@ public class Util {
         } catch (final ClassNotFoundException e) {
             return false;
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    public static Object networkList(SocketAddress socketAddress, String connectionMethod, String networkManager) {
-        try {
-            Class<?> minecraftServer = Class
-                    .forName("net.minecraft.server." + getPackageVersion() + ".MinecraftServer");
-            Object serverInstance = minecraftServer.getMethod("getServer", (Class<?>[]) null).invoke(minecraftServer,
-                    (Object[]) null);
-            Method serverConnection = serverInstance.getClass().getMethod(connectionMethod, (Class<?>[]) null);
-            Object invokedConnection = serverConnection.invoke(serverInstance, (Object[]) null);
-            Iterable<Object> networkList = (Iterable<Object>) Reflection.getField(networkManager, invokedConnection, 0);
-            for (final Object nextNetwork : networkList) {
-                Object address = nextNetwork.getClass().getMethod("getSocketAddress", (Class<?>[]) null)
-                        .invoke(nextNetwork, (Object[]) null);
-                if (address.equals(socketAddress)) {
-                    return nextNetwork;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public static String getPackageVersion() {

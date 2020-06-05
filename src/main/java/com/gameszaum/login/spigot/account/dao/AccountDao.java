@@ -1,9 +1,9 @@
 package com.gameszaum.login.spigot.account.dao;
 
+import com.gameszaum.login.core.database.mysql.MySQLBase;
 import com.gameszaum.login.spigot.Bukkit;
 import com.gameszaum.login.spigot.account.Account;
 import com.gameszaum.login.spigot.api.config.ConfigAPI;
-import com.gameszaum.login.spigot.database.mysql.MySQLBase;
 import com.gameszaum.login.spigot.event.AskCaptchaEvent;
 import com.gameszaum.login.spigot.event.BypassLoginEvent;
 import com.gameszaum.login.spigot.manager.AccountManager;

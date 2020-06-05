@@ -24,6 +24,7 @@ public class Bungee extends Plugin {
         instance = this;
 
         generateConfig();
+
         getProxy().getPluginManager().registerListener(this, new LoginListener());
 
         System.out.println("[GamesLogin] Plugin enabled.");
@@ -61,4 +62,5 @@ public class Bungee extends Plugin {
     public Configuration getConfig() {
         return config;
     }
+
 }

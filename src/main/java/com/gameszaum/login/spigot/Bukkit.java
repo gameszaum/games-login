@@ -1,11 +1,11 @@
 package com.gameszaum.login.spigot;
 
+import com.gameszaum.login.core.database.DatabaseCredentials;
+import com.gameszaum.login.core.database.mysql.MySQLBase;
+import com.gameszaum.login.core.database.mysql.builder.MySQLBuilder;
 import com.gameszaum.login.core.util.Util;
 import com.gameszaum.login.spigot.api.config.ConfigAPI;
 import com.gameszaum.login.spigot.command.Command;
-import com.gameszaum.login.spigot.database.DatabaseCredentials;
-import com.gameszaum.login.spigot.database.mysql.MySQLBase;
-import com.gameszaum.login.spigot.database.mysql.builder.MySQLBuilder;
 import com.gameszaum.login.spigot.listener.player.CheckListener;
 import com.gameszaum.login.spigot.listener.player.LoginListener;
 import com.gameszaum.login.spigot.listener.server.BlockActionsListener;
@@ -59,8 +59,8 @@ public class Bukkit extends JavaPlugin {
     private void generateFiles() {
         if (getConfig().getBoolean("use-mysql")) {
             mySQL = new MySQLBuilder().createConnection(new DatabaseCredentials(getConfig().getString("mysql.host"),
-                    getConfig().getString("mysql.db"), getConfig().getString("mysql.port"),
-                    getConfig().getString("mysql.user"), getConfig().getString("mysql.pass")));
+                    getConfig().getString("mysql.db"), getConfig().getString("mysql.user"), getConfig().getString("mysql.pass"),
+                    getConfig().getInt("mysql.port")));
             mySQL.executeQuery("CREATE TABLE IF NOT EXISTS `logins` (`name` VARCHAR(16), `pass` VARCHAR(100));");
         } else {
             accounts = new ConfigAPI("accounts", this);

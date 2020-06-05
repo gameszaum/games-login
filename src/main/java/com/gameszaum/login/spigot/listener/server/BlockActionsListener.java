@@ -78,7 +78,6 @@ public class BlockActionsListener implements Listener {
             Player player = (Player) event.getEntity();
 
             if (!accountManager.getAccount(player.getName()).isLogged()) {
-                player.sendMessage("§cVocê não pode falar no chat antes de se logar/registrar.");
                 event.setCancelled(true);
             }
         }
@@ -97,6 +96,16 @@ public class BlockActionsListener implements Listener {
         if (!accountManager.getAccount(event.getPlayer().getName()).isLogged()) {
             event.getPlayer().sendMessage("§cVocê não pode interagir antes de se logar/registrar.");
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    void chat(AsyncPlayerChatEvent event) {
+        if (!accountManager.getAccount(event.getPlayer().getName()).isLogged()) {
+            if (!event.getMessage().startsWith("/")) {
+                event.getPlayer().sendMessage("§cVocê não pode falar no chat antes de se logar/registrar.");
+                event.setCancelled(true);
+            }
         }
     }
 

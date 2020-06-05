@@ -63,6 +63,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>bungeecord-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -71,29 +75,20 @@
             <artifactId>spigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/libraries/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar</systemPath>
+            <systemPath>C:/APIs/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>bungeecord</groupId>
-            <artifactId>net.md_5</artifactId>
-            <version>1110</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/libraries/BungeeCord.jar</systemPath>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-api</artifactId>
+            <version>1.15-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.12</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.comphenix.protocol</groupId>
-            <artifactId>ProtocolLib-API</artifactId>
-            <version>4.4.0</version>
-            <scope>system</scope>
-            <systemPath>C:/APIs/ProtocolLib.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

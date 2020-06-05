@@ -47,14 +47,16 @@ public class CheckListener implements Listener {
         Account account = accountManager.getAccount(player.getName());
 
         if (account.isPremium()) {
-            player.sendMessage("§aAutenticado como jogador original.");
-
             Bukkit.getScheduler().scheduleAsyncDelayedTask(com.gameszaum.login.spigot.Bukkit.getPlugin(), () -> account.getAccountDao().bypassLogin(), 15L);
         } else {
             player.sendMessage("§cAutenticado como jogador pirata.");
 
             Bukkit.getScheduler().scheduleAsyncDelayedTask(com.gameszaum.login.spigot.Bukkit.getPlugin(), () -> account.getAccountDao().requestLogin(), 15L);
         }
+        Bukkit.getOnlinePlayers().forEach(o -> {
+            o.hidePlayer(player);
+            player.hidePlayer(o);
+        });
     }
 
     @EventHandler
