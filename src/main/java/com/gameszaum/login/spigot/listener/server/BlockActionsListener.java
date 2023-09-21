@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BlockActionsListener implements Listener {
 
-    private AccountManager accountManager;
+    private final AccountManager accountManager;
 
     public BlockActionsListener() {
         accountManager = Bukkit.getAccountManager();

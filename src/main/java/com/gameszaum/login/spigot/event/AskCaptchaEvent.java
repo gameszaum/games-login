@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerEvent;
 
 public class AskCaptchaEvent extends PlayerEvent {
 
-    private static HandlerList handlerList = new HandlerList();
+    private static final HandlerList handlerList = new HandlerList();
 
     public AskCaptchaEvent(Player who) {
         super(who);

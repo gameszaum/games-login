@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class CheckListener implements Listener {
 
-    private AccountManager accountManager;
+    private final AccountManager accountManager;
 
     public CheckListener() {
         accountManager = com.gameszaum.login.spigot.Bukkit.getAccountManager();
@@ -27,15 +27,6 @@ public class CheckListener implements Listener {
     void onPreLogin(AsyncPlayerPreLoginEvent event) {
         if (accountManager.getAccount(event.getName()) != null) {
             accountManager.removeAccount(event.getName());
-        }
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    void onLogin(PlayerLoginEvent event) {
-        try {
-            new AccountDao(event.getPlayer()).create(Check.fastCheck(event.getPlayer().getName()));
-        } catch (InvalidCheckException e) {
-            event.disallow(PlayerLoginEvent.Result.KICK_OTHER, "§cErro ao verificar sua sessão, entre novamente.");
         }
     }
 

@@ -75,7 +75,7 @@
             <artifactId>spigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>C:/APIs/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar</systemPath>
+            <systemPath>D:/workspace/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar</systemPath>
         </dependency>
 
         <dependency>

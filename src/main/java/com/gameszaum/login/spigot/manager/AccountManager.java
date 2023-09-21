@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AccountManager {
 
-    private List<Account> accounts;
+    private final List<Account> accounts;
 
     public AccountManager() {
         accounts = new LinkedList<>();

@@ -10,8 +10,5 @@
         <module name="games-login" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="games-login" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

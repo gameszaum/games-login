@@ -27,8 +27,8 @@ import java.util.Random;
 
 public class LoginListener implements Listener {
 
-    private AccountManager accountManager;
-    private String defaultServer;
+    private final AccountManager accountManager;
+    private final String defaultServer;
 
     public LoginListener() {
         accountManager = Bukkit.getAccountManager();

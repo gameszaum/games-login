@@ -7,25 +7,22 @@ import com.gameszaum.login.spigot.api.config.ConfigAPI;
 import com.gameszaum.login.spigot.event.AskCaptchaEvent;
 import com.gameszaum.login.spigot.event.BypassLoginEvent;
 import com.gameszaum.login.spigot.manager.AccountManager;
-import org.bukkit.entity.Player;
 
 public class AccountDao {
 
-    private Account account;
-    private Player player;
-    private ConfigAPI file;
-    private MySQLBase mySQL;
-    private AccountManager accountManager;
+    private final Account account;
+    private final ConfigAPI file;
+    private final MySQLBase mySQL;
+    private final AccountManager accountManager;
 
-    public AccountDao(Player player) {
-        this.player = player;
+    public AccountDao(String name) {
         this.account = new Account();
         this.file = Bukkit.getAccountsFile();
         this.mySQL = Bukkit.getMySQL();
         this.accountManager = Bukkit.getAccountManager();
 
         account.setAccountDao(this);
-        account.setName(player.getName());
+        account.setName(name);
         account.setCaptcha(true);
     }
 
@@ -35,11 +32,11 @@ public class AccountDao {
 
         if (!premium) {
             if (mySQL != null) {
-                if (!mySQL.contains("logins", "name", player.getName())) {
-                    mySQL.executeQuery("INSERT INTO `logins` (`name`, `pass`) VALUES ('" + player.getName() + "', 'null');");
+                if (!mySQL.contains("logins", "name", account.getName())) {
+                    mySQL.executeQuery("INSERT INTO `logins` (`name`, `pass`) VALUES ('" + account.getName() + "', 'null');");
                 }
             } else {
-                file.put("accounts." + player.getName() + ".pass", null);
+                file.put("accounts." + account.getName() + ".pass", null);
                 file.save();
             }
         }
@@ -49,21 +46,17 @@ public class AccountDao {
     private Account load(boolean premium) {
         if (!premium) {
             if (mySQL != null) {
-                if (mySQL.contains("logins", "name", player.getName())) {
-                    account.setPass(mySQL.getString("logins", "name", player.getName(), "pass"));
+                if (mySQL.contains("logins", "name", account.getName())) {
+                    account.setPass(mySQL.getString("logins", "name", account.getName(), "pass"));
                 }
             } else {
                 file.getConfigurationSection("accounts").getKeys(false).forEach(s -> {
-                    if (s.equalsIgnoreCase(player.getName())) {
+                    if (s.equalsIgnoreCase(account.getName())) {
                         account.setPass(file.getString("accounts." + s + ".pass"));
                     }
                 });
             }
-            if (account.getPass() != null && !account.getPass().equals("null")) {
-                account.setRegistered(true);
-            } else {
-                account.setRegistered(false);
-            }
+            account.setRegistered(account.getPass() != null && !account.getPass().equals("null"));
         }
         return account;
     }
@@ -71,20 +64,20 @@ public class AccountDao {
     public void update() {
         if (!account.isPremium()) {
             if (mySQL != null) {
-                mySQL.update("logins", "name", player.getName(), "pass", account.getPass());
+                mySQL.update("logins", "name", account.getName(), "pass", account.getPass());
             } else {
-                file.put("accounts." + player.getName() + ".pass", account.getPass());
+                file.put("accounts." + account.getName() + ".pass", account.getPass());
                 file.save();
             }
         }
     }
 
     public void bypassLogin() {
-        Bukkit.getPlugin().getServer().getPluginManager().callEvent(new BypassLoginEvent(player));
+        Bukkit.getPlugin().getServer().getPluginManager().callEvent(new BypassLoginEvent(org.bukkit.Bukkit.getPlayer(account.getName())));
     }
 
     public void requestLogin() {
-        Bukkit.getPlugin().getServer().getPluginManager().callEvent(new AskCaptchaEvent(player));
+        Bukkit.getPlugin().getServer().getPluginManager().callEvent(new AskCaptchaEvent(org.bukkit.Bukkit.getPlayer(account.getName())));
     }
 
 }

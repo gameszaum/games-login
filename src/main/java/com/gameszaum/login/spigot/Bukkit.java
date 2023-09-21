@@ -10,6 +10,8 @@ import com.gameszaum.login.spigot.listener.player.CheckListener;
 import com.gameszaum.login.spigot.listener.player.LoginListener;
 import com.gameszaum.login.spigot.listener.server.BlockActionsListener;
 import com.gameszaum.login.spigot.manager.AccountManager;
+import com.gameszaum.login.spigot.protocol.LoginReceiver;
+import com.gameszaum.login.spigot.version.Version;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /*
@@ -32,9 +34,15 @@ public class Bukkit extends JavaPlugin {
         saveDefaultConfig();
         generateFiles();
 
-        if (getServer().getOnlineMode()) {
-            Util.setOnlineMode(false);
+        if (!this.getServer().getOnlineMode()) {
+            Util.setOnlineMode(true);
         }
+        if (Version.getPackageVersion() == null) {
+            this.getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        new LoginReceiver();
+
         accountManager = new AccountManager();
 
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
@@ -52,7 +60,7 @@ public class Bukkit extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if(mySQL != null)
+        if (mySQL != null)
             mySQL.closeConnection();
     }
 
